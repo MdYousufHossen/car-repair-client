@@ -1,0 +1,8 @@
+.bgContainer {
+    background-color: rgba(45, 58, 74, 0.7);
+
+}
+
+.bgContainer .banner {
+    mix-blend-mode: darken;
+}

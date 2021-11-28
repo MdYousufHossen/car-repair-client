@@ -1,0 +1,8 @@
+.footer-bg {
+    background-image: url('../../Images/imagecompressor/car6-min.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-blend-mode: darken;
+    background-color: rgba(45, 58, 74, 0.9);
+}
