@@ -15,7 +15,7 @@ const EditProfile = () => {
         formData.append('email', email)
         formData.append('image', image)
 
-        fetch('http://localhost:5000/user', {
+        fetch('https://obscure-waters-41987.herokuapp.com/user', {
             method: 'PUT',
             body: formData
         })
@@ -24,7 +24,7 @@ const EditProfile = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/userByEmail?email=${email}`)
+        fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${email}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])

@@ -57,7 +57,7 @@ const Services = () => {
     const [services, setServices] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://obscure-waters-41987.herokuapp.com/services')
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])
@@ -79,7 +79,7 @@ const Services = () => {
                                             {service.description}
                                         </Card.Text>
                                         <div className="d-flex justify-content-between">
-                                            <Link to={`/purchase/${service._id}`}> <Button variant="outline-secondary">Secondary</Button></Link>
+                                            <Link to={`/purchase/${service._id}`}> <Button variant="outline-secondary">Buy Now</Button></Link>
                                             <h5>Price: 523</h5>
 
                                         </div>

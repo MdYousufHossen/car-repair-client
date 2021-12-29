@@ -8,7 +8,7 @@ const Dashboard = () => {
     const { user, userLogOut } = useAuth();
     const [users, setUsers] = useState({})
     useEffect(() => {
-        fetch(`http://localhost:5000/userByEmail?email=${user.email}`)
+        fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])
@@ -25,7 +25,7 @@ const Dashboard = () => {
                                     <Card.Img variant="top" style={{
                                         borderRadius: '50%', width: '100px', height: '100px', objectFit: 'cover'
                                     }} src={users.image ? `data:image/jpeg;base64,${users?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} />
-                                    <Card.Title className="text-muted text-center mt-2">{users.name}</Card.Title>
+                                    <Card.Title className="fw-bold text-center mt-2">{users.name}</Card.Title>
                                     <hr style={{ color: 'black', border: '1px solid gray', width: '100%' }} />
                                 </div>
                             </h5>

@@ -9,7 +9,7 @@ const Review = () => {
     const { user } = useAuth();
     const [users, setUsers] = useState({})
     useEffect(() => {
-        fetch(`http://localhost:5000/userByEmail?email=${user.email}`)
+        fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])
@@ -17,7 +17,7 @@ const Review = () => {
         e.preventDefault()
         const review = { text: text, rating: rating, user: users }
         // console.log(text, rating);
-        fetch('http://localhost:5000/review', {
+        fetch('https://obscure-waters-41987.herokuapp.com/review', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

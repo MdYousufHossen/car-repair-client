@@ -14,7 +14,7 @@ const Purchase = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
         data.service = service
-        fetch('http://localhost:5000/order', {
+        fetch('https://obscure-waters-41987.herokuapp.com/order', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -31,7 +31,7 @@ const Purchase = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/service/${id}`)
+        fetch(`https://obscure-waters-41987.herokuapp.com/service/${id}`)
             .then(res => res.json())
             .then(data => setService(data))
     }, [])
