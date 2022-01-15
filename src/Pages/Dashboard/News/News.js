@@ -4,7 +4,7 @@ import React from 'react';
 const News = () => {
     return (
         <div>
-            <h1> News</h1>
+            <h1 className="text-center primary-color">News</h1>
         </div>
     );
 };

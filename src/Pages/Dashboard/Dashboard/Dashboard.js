@@ -5,13 +5,14 @@ import useAuth from './../../../hooks/useAuth/useAuth';
 
 
 const Dashboard = () => {
-    const { user, userLogOut } = useAuth();
+    const { user, isAdmin, userLogOut } = useAuth();
     const [users, setUsers] = useState({})
     useEffect(() => {
         fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])
+
     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"
     return (
         <div>
@@ -38,26 +39,38 @@ const Dashboard = () => {
                                         <i className="fas fa-house-user "></i> <span className="ms-1 d-none d-sm-inline">Home</span>
                                     </Nav.Link>
                                 </li>
-                                <li className="nav-item">
+                                {isAdmin ? <li className="nav-item">
                                     <Nav.Link as={Link} to={`/dashboard`} className="nav-link align-middle px-0">
-                                        <i className="fas fa-border-all"></i> <span className="ms-1 d-none d-sm-inline">Orders</span>
+                                        <i className="fas fa-border-all"></i> <span className="ms-1 d-none d-sm-inline">Manage Orders</span>
                                     </Nav.Link>
                                 </li>
-                                <li className="nav-item">
+                                    : <li className="nav-item">
+                                        <Nav.Link as={Link} to={`/dashboard`} className="nav-link align-middle px-0">
+                                            <i className="fas fa-border-all"></i> <span className="ms-1 d-none d-sm-inline">Orders</span>
+                                        </Nav.Link>
+                                    </li>}
+                                {!isAdmin && <li className="nav-item">
                                     <Nav.Link as={Link} to={`/dashboard/review`} className="nav-link align-middle px-0">
                                         <i className="fas fa-users"></i><span className="ms-1 d-none d-sm-inline">Review</span>
                                     </Nav.Link>
-                                </li>
-                                <li className="nav-item">
+                                </li>}
+
+                                {isAdmin && <li className="nav-item">
+                                    <Nav.Link as={Link} to={`/dashboard/manageService`} className="nav-link align-middle px-0">
+                                        <i className="far fa-newspaper"></i><span className="ms-1 d-none d-sm-inline">Manage Services</span>
+                                    </Nav.Link>
+                                </li>}
+                                {isAdmin && <li className="nav-item">
                                     <Nav.Link as={Link} to={`/dashboard/news`} className="nav-link align-middle px-0">
                                         <i className="far fa-newspaper"></i><span className="ms-1 d-none d-sm-inline">News</span>
                                     </Nav.Link>
-                                </li>
+                                </li>}
                                 <li className="nav-item">
                                     <Nav.Link as={Link} to={`/dashboard/edit`} className="nav-link align-middle px-0">
                                         <i className="fas fa-user-edit"></i><span className="ms-1 d-none d-sm-inline">Edit Profile</span>
                                     </Nav.Link>
                                 </li>
+
                                 <li className="nav-item">
                                     <Nav.Link onClick={userLogOut} className="nav-link align-middle px-0">
                                         <i className="fas fa-sign-out-alt"></i><span className="ms-1 d-none d-sm-inline">Log-Out</span>

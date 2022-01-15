@@ -11,7 +11,14 @@ const Navigation = () => {
         fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUsers(data))
-    }, [])
+    }, [user.email])
+
+    function getFirstLetters(str) {
+        const firstLetters = str;
+
+        return firstLetters;
+    }
+
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -30,6 +37,7 @@ const Navigation = () => {
                     <Nav className="ms-auto fw-bold">
                         <Nav.Link as={Link} to="/home">Home</Nav.Link>
 
+
                         {
 
                             user.email && <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
@@ -44,21 +52,32 @@ const Navigation = () => {
 
 
                         {
-                            user.email ? <Nav.Link >
-                                <Card.Img variant="top" style={{
-                                    borderRadius: '50%', width: '70px', height: '70px', objectFit: 'cover', marginLeft: '10px'
-                                }} src={users.image ? `data:image/jpeg;base64,${users?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} />
+                            user.email && <Nav.Link >
+                                <div>
+                                    {users.image ? <Card.Img variant="top" style={{
+                                        borderRadius: '50%', width: '70px', height: '70px', objectFit: 'cover', marginLeft: '10px'
+                                    }} src={users.image ? `data:image/jpeg;base64,${users?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} />
+                                        : <div style={{
+                                            borderRadius: '50%', width: '70px', height: '70px', backgroundColor: '#7A7978', display: 'flex', justifyContent: 'center'
+                                        }} > <h3 style={{ position: 'absolute', top: '30px' }}>{user.displayName.split(' ').map(word => word[0]).join('').toUpperCase()}</h3></div>}
+                                </div>
 
                             </Nav.Link>
-                                : <Nav.Link as={Link} to="/login">Login</Nav.Link>
                         }
+                        {!user.email && <Nav.Link as={Link} className="mt-4" to="/login">Login</Nav.Link>}
+                        {!user.email && <Nav.Link > <Card.Img variant="top" style={{
+                            borderRadius: '50%', width: '70px', height: '70px', objectFit: 'cover', marginLeft: '10px'
+                        }} src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} /></Nav.Link>}
+
+
+
 
 
 
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>
+        </Navbar >
     );
 };
 

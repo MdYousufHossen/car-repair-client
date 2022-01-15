@@ -152,9 +152,15 @@ const Testimonials = () => {
                                 <Col >
                                     <Card className="border-0">
                                         <div className="d-flex justify-content-center">
-                                            <Card.Img variant="top" style={{
+                                            {/* <Card.Img variant="top" style={{
                                                 borderRadius: '50%', width: '100px', height: '100px', objectFit: 'cover'
-                                            }} src={reviews.user?.image ? `data:image/jpeg;base64,${reviews.user?.image} ` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} />
+                                            }} src={reviews.user?.image ? `data:image/jpeg;base64,${reviews.user?.image} ` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} /> */}
+                                            {reviews.user?.image ? <Card.Img variant="top" style={{
+                                                borderRadius: '50%', width: '100px', height: '100px', objectFit: 'cover'
+                                            }} src={reviews.user?.image ? `data:image/jpeg;base64,${reviews.user?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} />
+                                                : <div style={{
+                                                    borderRadius: '50%', width: '100px', height: '100px', backgroundColor: '#7A7978', display: 'flex', justifyContent: 'center'
+                                                }} > <h3 style={{ position: 'absolute', top: '30px' }}>{reviews.user?.name?.split(' ').map(word => word[0]).join('')}</h3></div>}
                                         </div>
                                         <Card.Body>
                                             <Card.Title className="fs-5">{reviews.user?.name}</Card.Title>
@@ -166,7 +172,7 @@ const Testimonials = () => {
                                                 fullSymbol="fa fa-star fa-2x"
                                             />
                                             <Card.Text className="fs-6 text-muted">
-                                                {reviews.text}
+                                                {reviews.text.slice(0, 300)}
                                             </Card.Text>
 
                                         </Card.Body>

@@ -65,32 +65,32 @@ const Services = () => {
     return (
         <div>
             <h3 className="my-5 primary-color fw-bold text-center">Our Services</h3>
-            <Container>
-                <Row xs={1} md={2} lg={3} className="g-5 my-5">
-                    {services.map((service, index) => (
-                        <Col key={index}>
-                            <Zoom>
-                                <Card className="service_card">
-                                    <Card.Img className="img-fluid" style={{ width: '340px', height: '200px' }} variant="top" src={service.image} />
-                                    <Card.Body>
 
-                                        <Card.Title>{service.name}</Card.Title>
-                                        <Card.Text className="text-muted">
-                                            {service.description}
-                                        </Card.Text>
-                                        <div className="d-flex justify-content-between">
-                                            <Link to={`/purchase/${service._id}`}> <Button variant="outline-secondary">Buy Now</Button></Link>
-                                            <h5>Price: 523</h5>
+            <Row container-fluid xs={1} md={2} lg={3} className="g-5 my-5 ">
+                {services.map((service, index) => (
+                    <Col key={index}>
+                        <Zoom>
+                            <Card className="service_card">
+                                <Card.Img className="img-fluid" style={{ width: '100%', height: '200px' }} variant="top" src={service.image} />
+                                <Card.Body>
 
-                                        </div>
+                                    <Card.Title>{service.name}</Card.Title>
+                                    <Card.Text className="text-muted">
+                                        {service.description}
+                                    </Card.Text>
+                                    <div className="d-flex justify-content-between">
+                                        <Link to={`/purchase/${service._id}`}> <Button variant="outline-secondary">Buy Now</Button></Link>
+                                        <h5>Price: 523</h5>
 
-                                    </Card.Body>
-                                </Card>
-                            </Zoom>
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
+                                    </div>
+
+                                </Card.Body>
+                            </Card>
+                        </Zoom>
+                    </Col>
+                ))}
+            </Row>
+
 
 
         </div>

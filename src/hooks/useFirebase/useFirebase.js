@@ -8,8 +8,9 @@ const useFirebase = () => {
     const [user, setUser] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState('')
+    const [isAdmin, setAdmin] = useState(false)
     const auth = getAuth();
-
+    console.log('isAmin', isAdmin)
     console.log(user);
     const GoogleSignIn = () => {
         setIsLoading(true)
@@ -80,6 +81,13 @@ const useFirebase = () => {
 
     }, [])
 
+    // admin validation......................
+    useEffect(() => {
+        fetch(`http://localhost:5000/isadmin/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user.email])
+
 
     const saveUser = (name, email) => {
         const user = { name, email }
@@ -101,7 +109,8 @@ const useFirebase = () => {
         userLogOut,
         user,
         isLoading,
-        error
+        error,
+        isAdmin
     }
 }
 export default useFirebase;
