@@ -23,14 +23,11 @@ const Dashboard = () => {
                             <h5 className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                                 <div className="fs-5 d-none d-sm-inline">
                                     {users.image ? <Card.Img variant="top" style={{
-                                        borderRadius: '50%', width: '70px', height: '70px', objectFit: 'cover', marginLeft: '10px'
+                                        borderRadius: '50%', width: '100px', height: '100px', objectFit: 'cover', marginLeft: '10px'
                                     }} src={users.image ? `${users?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} />
                                         : <div style={{
                                             borderRadius: '50%', width: '100px', height: '100px', backgroundColor: '#7A7978', display: 'flex', justifyContent: 'center', alignItems: 'center'
                                         }} > <h3 style={{ position: 'absolute', top: '30px' }}>{user.displayName.split(' ').map(word => word[0]).join('').toUpperCase()}</h3></div>}
-                                    {/* <Card.Img variant="top" style={{
-                                        borderRadius: '50%', width: '100px', height: '100px', objectFit: 'cover'
-                                    }} src={users.image ? `data:image/jpeg;base64,${users?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} /> */}
 
                                     <Card.Title className="fw-bold text-center mt-2">{users.name}</Card.Title>
                                     <hr style={{ color: 'black', border: '1px solid gray', width: '100%' }} />
