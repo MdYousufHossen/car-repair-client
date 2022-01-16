@@ -83,7 +83,7 @@ const useFirebase = () => {
 
     // admin validation......................
     useEffect(() => {
-        fetch(`http://localhost:5000/isadmin/${user.email}`)
+        fetch(`https://obscure-waters-41987.herokuapp.com/isadmin/${user.email}`)
             .then(res => res.json())
             .then(data => setAdmin(data.admin))
     }, [user.email])

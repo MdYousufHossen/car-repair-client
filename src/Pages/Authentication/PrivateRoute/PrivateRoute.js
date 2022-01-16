@@ -7,7 +7,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     const { user, isLoading } = useAuth();
     let location = useLocation();
     if (isLoading) {
-        return <Spinner animation="grow" variant="dark" />
+        return <div className="d-flex justify-content-center align-items-center"><Spinner animation="border" /></div>
     }
     if (user.email) {
         return children;

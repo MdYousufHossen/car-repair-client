@@ -18,6 +18,7 @@ import UpdateService from './Pages/Dashboard/UpdateService/UpdateService';
 import useAuth from './hooks/useAuth/useAuth';
 import MangeOrders from './Pages/Dashboard/ManageOrders/MangeOrders';
 import AdminRoute from './Pages/Authentication/AdminRoute/AdminRoute';
+import AddService from './Pages/Dashboard/AddService/AddService';
 
 function App() {
   const { user, isAdmin } = useAuth();
@@ -35,6 +36,7 @@ function App() {
           : <Route exact path={`/dashboard`} element={<Orders />} />}
         <Route path={`/dashboard/manageService`} element={<AdminRoute><ManageServices /></AdminRoute>} />
         <Route path={`/dashboard/news`} element={<AdminRoute><News /></AdminRoute>} />
+        <Route path={`/dashboard/addservice`} element={<AdminRoute><AddService /></AdminRoute>} />
         <Route path={`/dashboard/review`} element={< Review />} />
         <Route path={`/dashboard/edit`} element={<EditProfile />} />
 

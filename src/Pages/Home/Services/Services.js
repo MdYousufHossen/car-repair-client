@@ -80,7 +80,7 @@ const Services = () => {
                                     </Card.Text>
                                     <div className="d-flex justify-content-between">
                                         <Link to={`/purchase/${service._id}`}> <Button variant="outline-secondary">Buy Now</Button></Link>
-                                        <h5>Price: 523</h5>
+                                        <h5>Price: ${service.price}</h5>
 
                                     </div>
 
