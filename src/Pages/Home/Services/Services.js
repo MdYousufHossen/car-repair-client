@@ -63,10 +63,10 @@ const Services = () => {
     }, [])
 
     return (
-        <div>
+        <Container fluid="md" className="">
             <h3 className="my-5 primary-color fw-bold text-center">Our Services</h3>
 
-            <Row container-fluid xs={1} md={2} lg={3} className="g-5 my-5 ">
+            <Row container xs={1} md={2} lg={3} className="  g-5 my-5 d-flex justify-content-md-center ">
                 {services.map((service, index) => (
                     <Col key={index}>
                         <Zoom>
@@ -93,7 +93,7 @@ const Services = () => {
 
 
 
-        </div>
+        </Container>
     );
 };
 

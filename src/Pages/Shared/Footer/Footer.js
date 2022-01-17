@@ -1,12 +1,19 @@
 import React from 'react';
-import './Footer.css'
+import './Footer.css';
+import logo from '../../Images/logo-orange-2.png'
 
 const Footer = () => {
     return (
         <div className="secondary-bg-color ps-lg-4 mt-5 px-3 text-light row footer-bg">
             <div className="col-lg-3 m-lg-5 m-2">
-                <h1><span className="fw-bold text-warning">The Fragrance Family</span></h1>
-                <p className=" mt-4 fw-bold">A wide range of perfumes, predominantly based on synthetic ingredients, are used in household products. For example, perfumes are used in air fresheners to provide a desired pleasing smell to our homes, work or public spaces.
+                <img
+                    alt=""
+                    src={logo}
+                    width="235"
+                    height="105"
+                    className="d-inline-block align-top"
+                />{' '}
+                <p className=" mt-4 fw-bold">The Women’s Industry Network announced 11 new recipients of the 2021 WIN College Student Tuition and Conference Scholarship Award presented annually to deserving students enrolled in a post-secondary collision repair technology program.
                 </p>
                 <h6 className="fw-bold mt-5">SUBSCRIBE</h6>
             </div>
