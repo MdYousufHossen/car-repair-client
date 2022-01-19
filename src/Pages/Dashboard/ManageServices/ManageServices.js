@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Row, Button, Spinner } from 'react-bootstrap';
 import Zoom from 'react-reveal/Zoom';
 import { NavLink, Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 
@@ -18,18 +19,34 @@ const ManageServices = () => {
             })
     }, [])
     const handleDelete = (id) => {
-        console.log(id)
-        fetch(`https://obscure-waters-41987.herokuapp.com/service/${id}`, {
-            method: 'DELETE'
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.deleteCount > 0) {
-                    const remainingService = services.filter(service => service._id !== id)
-                    setServices(remainingService)
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your imaginary file has been deleted!", {
+                        icon: "success",
+                    });
+                    fetch(`https://obscure-waters-41987.herokuapp.com/service/${id}`, {
+                        method: 'DELETE'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.deletedCount > 0) {
+                                const remainingService = services.filter(service => service._id !== id)
+                                setServices(remainingService)
+                            }
+                        })
+                } else {
+                    swal("Your imaginary file is safe!");
                 }
-            })
+            });
+
     }
 
     return (
@@ -50,7 +67,7 @@ const ManageServices = () => {
                                         </Card.Text>
                                         <div className="d-flex justify-content-between">
                                             <Link to={`/manageService/${service._id}`}>  <Button variant="outline-info">Edit</Button></Link>
-                                            <h5>Price: 523</h5>
+                                            <h5>Price: $ {service.price}</h5>
                                             <Button onClick={() => handleDelete(service._id)} variant="outline-danger">Delete</Button>
 
                                         </div>

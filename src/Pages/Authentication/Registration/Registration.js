@@ -15,9 +15,9 @@ import useAuth from '../../../hooks/useAuth/useAuth';
 const Registration = () => {
     const { userRegistration, GoogleSignIn } = useAuth();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-
+    const navigate = useNavigate()
     const onSubmit = data => {
-        userRegistration(data.email, data.password, data.name)
+        userRegistration(data.email, data.password, data.name, navigate)
         reset()
     };
 

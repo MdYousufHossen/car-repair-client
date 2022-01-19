@@ -11,7 +11,21 @@ const Orders = () => {
         fetch(`https://obscure-waters-41987.herokuapp.com/orderbyEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setOrders(data))
-    }, [])
+    }, [user.email])
+
+    const handleDelete = (id) => {
+        fetch(`https://obscure-waters-41987.herokuapp.com/order/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deleteCount > 0) {
+                    const remainingService = orders.filter(service => service._id !== id)
+                    setOrders(remainingService)
+                }
+            })
+    }
+
     return (
         <div>
             <h1 className="text-center primary-color mb-3">Your Orders</h1>
@@ -34,7 +48,7 @@ const Orders = () => {
                             <td>{row.service.name}</td>
                             <td>$ {row.service.price}</td>
                             <td> <img src={row.service.image} className="w-25" alt="" /> </td>
-                            <td><button className="btn btn-warning">Delete</button></td>
+                            <td ><button onClick={() => handleDelete(row._id)} className="btn btn-warning">Delete</button></td>
 
                         </tr>
                     ))}

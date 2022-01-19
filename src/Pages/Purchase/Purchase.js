@@ -6,12 +6,15 @@ import { Card, Col, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import './purchase.css'
 import useAuth from '../../hooks/useAuth/useAuth';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 const Purchase = () => {
     const { id } = useParams();
     const { user } = useAuth();
     const [service, setService] = useState({})
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const navigate = useNavigate()
     const onSubmit = data => {
         data.service = service
         fetch('https://obscure-waters-41987.herokuapp.com/order', {
@@ -22,7 +25,10 @@ const Purchase = () => {
             body: JSON.stringify(data)
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                swal("Good job!", "Congratulations you are successfully proceed service!", "success")
+                navigate('/dashboard')
+            })
         reset()
         console.log(data)
     };

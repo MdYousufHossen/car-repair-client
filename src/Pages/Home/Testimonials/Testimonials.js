@@ -116,7 +116,7 @@ const Testimonials = () => {
             .then(data => setReviews(data))
     }, [])
     return (
-        <div className="my-5">
+        <div className="container my-5">
             <h2 className="text-center primary-color mb-5">Testimonials</h2>
 
             <Swiper

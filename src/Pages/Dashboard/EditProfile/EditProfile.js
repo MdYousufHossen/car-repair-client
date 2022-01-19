@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Card, Button } from 'react-bootstrap';
+import { Form, Card, Button, Spinner } from 'react-bootstrap';
+import swal from 'sweetalert';
 import useAuth from './../../../hooks/useAuth/useAuth';
 
 
@@ -9,7 +10,7 @@ const EditProfile = () => {
     const { user } = useAuth()
     const [image, setImage] = useState(null)
     const [users, setUsers] = useState({})
-
+    const [isLoading, setIsLoading] = useState(false)
 
 
 
@@ -18,7 +19,7 @@ const EditProfile = () => {
 
         const formData = new FormData();
         formData.append('image', image)
-
+        setIsLoading(true)
         fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`, {
             method: 'POST',
             body: formData
@@ -35,7 +36,10 @@ const EditProfile = () => {
                     body: JSON.stringify({ image })
                 })
                     .then(res => res.json())
-                    .then(data => console.log(data))
+                    .then(data => {
+                        setIsLoading(false)
+                        swal("Good job!", "Profile Picture successfully uploaded.", "success")
+                    })
             })
 
 
@@ -65,9 +69,10 @@ const EditProfile = () => {
                         <Form.Label>Image update</Form.Label>
                         <Form.Control onChange={(e) => setImage(e.target.files[0])} type="file" />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
+                    {isLoading ? <div className="d-flex justify-content-center align-items-center"><Spinner animation="border" /></div>
+                        : <Button variant="primary" type="submit">
+                            Submit
+                        </Button>}
                 </form>
             </div>
         </div>

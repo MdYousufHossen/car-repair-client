@@ -1,6 +1,8 @@
 import initialization from './../../Pages/Authentication/firebase/firebase.init';
 import { getAuth, updateProfile, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from 'react';
+import swal from 'sweetalert';
+
 
 initialization();
 
@@ -9,6 +11,7 @@ const useFirebase = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState('')
     const [isAdmin, setAdmin] = useState(false)
+
     const auth = getAuth();
     console.log('isAmin', isAdmin)
     console.log(user);
@@ -25,7 +28,7 @@ const useFirebase = () => {
             }).finally(() => setIsLoading(false))
     }
 
-    const userRegistration = (email, password, userName) => {
+    const userRegistration = (email, password, userName, navigate) => {
         setIsLoading(true)
         createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
@@ -35,9 +38,10 @@ const useFirebase = () => {
                 updateProfile(auth.currentUser, {
                     displayName: userName
                 }).then(() => {
-
+                    swal("Good job!", "Congratulations you are successfully sign up!", "success")
+                    navigate('/home')
                 }).catch((error) => {
-
+                    setError(error.message)
                 });
                 setError('')
             })
@@ -50,6 +54,7 @@ const useFirebase = () => {
         setIsLoading(true)
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
+                swal("Good job!", "Congratulations you are successfully sign in!", "success")
                 const destination = location?.state?.from || '/';
                 navigate(destination)
                 setError('')
@@ -60,12 +65,36 @@ const useFirebase = () => {
     }
 
     const userLogOut = () => {
-        setIsLoading(true)
-        signOut(auth).then(() => {
-            setError('')
-        }).catch((error) => {
-            setError(error.message);
-        }).finally(() => setIsLoading(false))
+        swal({
+            title: "Are you sure?",
+            text: "You went to log Out!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your are successfully log Out!", {
+                        icon: "success",
+                    });
+
+                    signOut(auth)
+                        .then(() => {
+
+                            setError("")
+                        })
+                        .catch((error) => {
+                            setError(error.message)
+                        })
+                        .finally(() => setIsLoading(false))
+
+                } else {
+                    swal("Welcome to again!");
+
+                }
+            })
+
+
     }
 
     useEffect(() => {
@@ -80,6 +109,11 @@ const useFirebase = () => {
         return () => unsubscribe
 
     }, [])
+
+    // error handling................
+    if (error) {
+        swal("An error Occurred!", error, "error")
+    }
 
     // admin validation......................
     useEffect(() => {

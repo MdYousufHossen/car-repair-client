@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Card, Form, Button, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router';
+import swal from 'sweetalert';
 
 const UpdateService = () => {
 
@@ -8,6 +9,7 @@ const UpdateService = () => {
     const [image, setImage] = useState(null)
     const [updated, setUpdate] = useState({})
     const [isLoading, setIsLoading] = useState(true)
+    const [isLoadingAfterClick, setIsLoadingAfterClick] = useState(false)
 
 
     useEffect(() => {
@@ -34,7 +36,7 @@ const UpdateService = () => {
 
         const formData = new FormData();
         formData.append('image', image)
-
+        setIsLoadingAfterClick(true)
         fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`, {
             method: 'POST',
             body: formData
@@ -58,7 +60,10 @@ const UpdateService = () => {
                     body: JSON.stringify(editedData)
                 })
                     .then(res => res.json())
-                    .then(data => console.log(data))
+                    .then(data => {
+                        setIsLoadingAfterClick(false)
+                        swal("Good job!", "Congratulations Updated your service.", "success")
+                    })
             })
 
     }
@@ -86,9 +91,10 @@ const UpdateService = () => {
                                     </div>
                                     <Form.Control as="textarea" placeholder='Service Description' onBlur={handleBlur} name="description" defaultValue={updated.description} required />
                                 </Form.Group>
-                                <Button variant="primary" type="submit">
-                                    Submit
-                                </Button>
+                                {isLoadingAfterClick ? <div className="d-flex justify-content-center align-items-center"><Spinner animation="border" /></div>
+                                    : <Button variant="primary" type="submit">
+                                        Submit
+                                    </Button>}
                             </form>
                         </div>
                     </div>

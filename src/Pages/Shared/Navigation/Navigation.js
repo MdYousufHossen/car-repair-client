@@ -27,8 +27,8 @@ const Navigation = () => {
                     <img
                         alt=""
                         src={logo}
-                        width="135"
-                        height="35"
+                        width="155"
+                        height="55"
                         className="d-inline-block align-top"
                     />{' '}
                 </Navbar.Brand>

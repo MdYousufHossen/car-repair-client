@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Spinner, Table } from 'react-bootstrap';
+import swal from 'sweetalert';
 import useAuth from './../../../hooks/useAuth/useAuth';
 
 
@@ -16,6 +17,47 @@ const Orders = () => {
                 setIsLoading(false)
             })
     }, [])
+
+
+
+    const handleDelete = (id) => {
+        swal({
+            title: "Are you sure?",
+            text: "You went to log Out!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your are successfully log Out!", {
+                        icon: "success",
+                    });
+
+                    fetch(`https://obscure-waters-41987.herokuapp.com/order/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.deletedCount > 0) {
+                                const remainingService = orders.filter(service => service._id !== id)
+                                setOrders(remainingService)
+                            }
+                        })
+
+
+                } else {
+                    swal("Service is not delete!");
+
+                }
+            });
+    }
+
+
     return (
         <div>
             <h1 className="text-center primary-color mb-3">Manage Orders</h1>
@@ -39,7 +81,7 @@ const Orders = () => {
                                 <td>{row.service.name}</td>
                                 <td>$ {row.service.price}</td>
                                 <td> <img src={row.service.image} className="w-25" alt="" /> </td>
-                                <td><button className="btn btn-warning">Delete</button></td>
+                                <td><button onClick={() => handleDelete(row._id)} className="btn btn-warning">Delete</button></td>
 
                             </tr>
                         ))}

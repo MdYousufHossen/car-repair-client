@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router';
+import swal from 'sweetalert';
 
 const AddService = () => {
 
@@ -10,6 +11,7 @@ const AddService = () => {
     const initial = { name: service.name, desc: service.description, price: service.price }
     console.log(initial)
     const [updated, setUpdate] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
 
 
 
@@ -27,7 +29,7 @@ const AddService = () => {
 
         const formData = new FormData();
         formData.append('image', image)
-
+        setIsLoading(true)
         fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`, {
             method: 'POST',
             body: formData
@@ -52,7 +54,10 @@ const AddService = () => {
                     body: JSON.stringify(editedData)
                 })
                     .then(res => res.json())
-                    .then(data => console.log(data))
+                    .then(data => {
+                        setIsLoading(false)
+                        swal("Good job!", "Congratulations You added new service.", "success")
+                    })
             })
 
     }
@@ -79,9 +84,10 @@ const AddService = () => {
                                 </div>
                                 <Form.Control as="textarea" placeholder='Service Description' onBlur={handleBlur} name="desc" required />
                             </Form.Group>
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
+                            {isLoading ? <div className="d-flex justify-content-center align-items-center"><Spinner animation="border" /></div>
+                                : <Button variant="primary" type="submit">
+                                    Submit
+                                </Button>}
                         </form>
                     </div>
                 </div>

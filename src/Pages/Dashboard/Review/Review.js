@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import Rating from 'react-rating';
+import swal from 'sweetalert';
 import useAuth from '../../../hooks/useAuth/useAuth';
 
 const Review = () => {
@@ -8,6 +9,7 @@ const Review = () => {
     const [text, setText] = useState('')
     const { user } = useAuth();
     const [users, setUsers] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
         fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${user.email}`)
             .then(res => res.json())
@@ -16,7 +18,8 @@ const Review = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const review = { text: text, rating: rating, user: users }
-        // console.log(text, rating);
+
+        setIsLoading(true)
         fetch('https://obscure-waters-41987.herokuapp.com/review', {
             method: "POST",
             headers: {
@@ -25,7 +28,12 @@ const Review = () => {
             body: JSON.stringify(review)
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                setIsLoading(false)
+                swal("Good job!", "Congratulations Review done.", "success")
+
+
+            })
     }
     return (
         <div>
@@ -46,9 +54,10 @@ const Review = () => {
                         fractions={2}
                         onChange={(rate) => setRating(rate)}
                     /> <br />
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
+                    {isLoading ? <div className="d-flex justify-content-center align-items-center"><Spinner animation="border" /></div>
+                        : <Button variant="primary" type="submit">
+                            Submit
+                        </Button>}
                 </form>
             </div>
         </div>
