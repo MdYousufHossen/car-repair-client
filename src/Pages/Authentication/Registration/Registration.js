@@ -35,7 +35,7 @@ const Registration = () => {
                     <form onSubmit={handleSubmit(onSubmit)} >
                         <Form.Label>User Name</Form.Label>
                         <i className="fa fa-user icon-3"></i>
-                        <input className="form-control ps-5" type="text" defaultValue="" placeholder="Please write your user name" {...register("name")} />
+                        <input className="form-control ps-5" type="text" defaultValue="" placeholder="Please write your user name" {...register("name", { required: true })} />
                         <Form.Label>Email address</Form.Label>
                         <i className="fas fa-envelope icon-1"></i>
                         <input className="form-control ps-5" type="email" defaultValue="" placeholder="Please write your email" {...register("email", { required: true })} />

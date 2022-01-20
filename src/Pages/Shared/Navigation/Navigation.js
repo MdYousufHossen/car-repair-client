@@ -13,12 +13,6 @@ const Navigation = () => {
             .then(data => setUsers(data))
     }, [user.email])
 
-    function getFirstLetters(str) {
-        const firstLetters = str;
-
-        return firstLetters;
-    }
-
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -59,7 +53,7 @@ const Navigation = () => {
                                     }} src={users.image ? `${users?.image}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU"} />
                                         : <div style={{
                                             borderRadius: '50%', width: '70px', height: '70px', backgroundColor: '#7A7978', display: 'flex', justifyContent: 'center'
-                                        }} > <h3 style={{ position: 'absolute', top: '30px' }}>{user.displayName.split(' ').map(word => word[0]).join('').toUpperCase()}</h3></div>}
+                                        }} > <h3 style={{ position: 'absolute', top: '30px' }}>{user?.displayName?.split(' ').map(word => word[0]).join('').toUpperCase()}</h3></div>}
                                 </div>
 
                             </Nav.Link>

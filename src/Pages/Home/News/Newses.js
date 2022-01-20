@@ -70,7 +70,7 @@ const Newses = () => {
     useEffect(() => {
         fetch('https://obscure-waters-41987.herokuapp.com/newses')
             .then(res => res.json())
-            .then(data => setNewses(data))
+            .then(data => setNewses([...data].reverse()))
     }, [])
 
     const handleDetails = (news) => {
@@ -83,10 +83,10 @@ const Newses = () => {
                 <Fade left>
                     <div className="col-lg-6" >
                         {
-                            newses.map(news =>
+                            newses.slice(0, 7).map(news =>
                                 <ListGroup className=" textHover" defaultActiveKey="#link1" key={news._id}>
-                                    <ListGroup.Item className="bg-transparent m-1 text-light  border-light " action onClick={() => handleDetails(news)}>
-                                        {news?.title}
+                                    <ListGroup.Item className="bg-transparent m-1 text-light  border-light d-flex justify-content-between " action onClick={() => handleDetails(news)}>
+                                        <span> {news?.title}</span>  <span> {news?.time}</span>
                                     </ListGroup.Item>
                                 </ListGroup>,
                             )
@@ -101,7 +101,10 @@ const Newses = () => {
                                 <Card className="bg-transparent text-light border-light mt-lg-0 mt-3 " style={{ width: '100%' }}>
                                     <Card.Img style={{ height: '260px', width: '100%' }} variant="top" src={news ? news?.image : newses?.[0]?.image} />
                                     <Card.Body>
-                                        <Card.Title>{news ? news.title : newses?.[0]?.title}</Card.Title>
+                                        <div>
+                                            <Card.Title >{news ? news.title : newses?.[0]?.title}</Card.Title>
+
+                                        </div>
                                         <Card.Text>
                                             {news ? news?.description.slice(0, 60) : newses?.[0]?.description?.slice(0, 60)}...
                                         </Card.Text>

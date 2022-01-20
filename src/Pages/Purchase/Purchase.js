@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Footer from '../Shared/Footer/Footer';
 import Navigation from './../Shared/Navigation/Navigation';
-import { Card, Col, Form } from 'react-bootstrap';
+import { Card, Col, Form, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import './purchase.css'
 import useAuth from '../../hooks/useAuth/useAuth';
@@ -13,9 +13,11 @@ const Purchase = () => {
     const { id } = useParams();
     const { user } = useAuth();
     const [service, setService] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const navigate = useNavigate()
     const onSubmit = data => {
+        setIsLoading(true)
         data.service = service
         fetch('https://obscure-waters-41987.herokuapp.com/order', {
             method: 'POST',
@@ -26,11 +28,11 @@ const Purchase = () => {
         })
             .then(res => res.json())
             .then(data => {
+                setIsLoading(false)
                 swal("Good job!", "Congratulations you are successfully proceed service!", "success")
                 navigate('/dashboard')
             })
         reset()
-        console.log(data)
     };
 
 
@@ -92,7 +94,8 @@ const Purchase = () => {
 
                         {errors.exampleRequired && <span>This field is required</span>}
 
-                        <input className="btn btn-warning" type="submit" />
+                        {isLoading ? <div className="d-flex justify-content-center align-items-center"><Spinner animation="border" /></div>
+                            : <input className="btn btn-warning" type="submit" />}
                     </form>
 
                 </div>

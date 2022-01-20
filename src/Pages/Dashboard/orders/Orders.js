@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Table } from 'react-bootstrap';
+import swal from 'sweetalert';
 import useAuth from './../../../hooks/useAuth/useAuth';
 
 
@@ -14,16 +15,33 @@ const Orders = () => {
     }, [user.email])
 
     const handleDelete = (id) => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/order/${id}`, {
-            method: 'DELETE'
+        swal({
+            title: "Are you sure?",
+            text: "You went to log Out!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data.deleteCount > 0) {
-                    const remainingService = orders.filter(service => service._id !== id)
-                    setOrders(remainingService)
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your are successfully log Out!", {
+                        icon: "success",
+                    });
+                    fetch(`https://obscure-waters-41987.herokuapp.com/order/${id}`, {
+                        method: 'DELETE'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.deletedCount > 0) {
+                                const remainingService = orders.filter(service => service._id !== id)
+                                setOrders(remainingService)
+                            }
+                        })
+                } else {
+                    swal("Service is not delete!");
+
                 }
-            })
+            });
     }
 
     return (
