@@ -66,11 +66,11 @@ const Services = () => {
         <Container fluid="md" className="">
             <h3 className="my-5 primary-color fw-bold text-center">Our Services</h3>
 
-            <Row container xs={1} md={2} lg={3} className="  g-5 my-5 d-flex justify-content-md-center ">
+            <Row container-fluid xs={1} md={2} lg={3} className="g-lg-5 g-3 my-5  ">
                 {services.map((service, index) => (
-                    <Col key={index}>
+                    <Col key={index} className=" container-fluid ">
                         <Zoom>
-                            <Card className="service_card">
+                            <Card className="service_card ">
                                 <Card.Img className="img-fluid" style={{ width: '100%', height: '200px' }} variant="top" src={service.image} />
                                 <Card.Body>
 

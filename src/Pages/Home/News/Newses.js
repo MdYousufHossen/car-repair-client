@@ -3,6 +3,7 @@ import { Card, Col, ListGroup } from 'react-bootstrap';
 import './news.css'
 import Fade from 'react-reveal/Fade';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // const services = [
 //     {
@@ -75,6 +76,7 @@ const Newses = () => {
 
     const handleDetails = (news) => {
         setNews(news)
+        console.log(news._id, "newwww")
     }
     return (
         <div className="news-bg ">
@@ -95,28 +97,26 @@ const Newses = () => {
                 </Fade>
                 <Fade right>
                     <div className="col-lg-6" >
-                        <Col>
+                        <Link style={{ textDecoration: "none" }} to={`/newsDetails/${news ? news?._id : newses?.[0]?._id}`}>
+                            <Col>
 
-                            {
-                                <Card className="bg-transparent text-light border-light mt-lg-0 mt-3 " style={{ width: '100%' }}>
-                                    <Card.Img style={{ height: '260px', width: '100%' }} variant="top" src={news ? news?.image : newses?.[0]?.image} />
-                                    <Card.Body>
-                                        <div>
-                                            <Card.Title >{news ? news.title : newses?.[0]?.title}</Card.Title>
+                                {
+                                    <Card className="bg-transparent text-light border-light mt-lg-0 mt-3 " style={{ width: '100%' }}>
+                                        <Card.Img style={{ height: '260px', width: '100%' }} variant="top" src={news ? news?.image : newses?.[0]?.image} />
+                                        <Card.Body>
+                                            <div>
+                                                <Card.Title >{news ? news.title : newses?.[0]?.title}</Card.Title>
 
-                                        </div>
-                                        <Card.Text>
-                                            {news ? news?.description.slice(0, 60) : newses?.[0]?.description?.slice(0, 60)}...
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                                //  <div className="spinner-border text-success" role="status">
-                                //     <span className="visually-hidden">Loading...</span>
-                                // </div>
+                                            </div>
+                                            <Card.Text>
+                                                {news ? news?.description.slice(0, 60) : newses?.[0]?.description?.slice(0, 60)}...
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                }
 
-                            }
-
-                        </Col>
+                            </Col>
+                        </Link>
                     </div>
                 </Fade>
             </div>

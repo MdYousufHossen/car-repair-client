@@ -19,6 +19,7 @@ import useAuth from './hooks/useAuth/useAuth';
 import MangeOrders from './Pages/Dashboard/ManageOrders/MangeOrders';
 import AdminRoute from './Pages/Authentication/AdminRoute/AdminRoute';
 import AddService from './Pages/Dashboard/AddService/AddService';
+import NewsDetails from './Pages/NewsDetails/NewsDetails';
 
 function App() {
   const { user, isAdmin } = useAuth();
@@ -31,6 +32,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Registration />} />
       <Route path={`/manageService/:id`} element={<UpdateService />} />
+      <Route path={`/newsDetails/:id`} element={<NewsDetails />} />
       <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} >
         {isAdmin ? <Route exact path={`/dashboard`} element={<AdminRoute><MangeOrders /></AdminRoute>} />
           : <Route exact path={`/dashboard`} element={<Orders />} />}

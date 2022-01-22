@@ -13,3 +13,7 @@
 .secondary-bg-color {
   background-color: #2D2D2D;
 }
+
+.container {
+  overflow-x: hidden;
+}
