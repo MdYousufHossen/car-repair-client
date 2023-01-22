@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Card, Form, Button, Spinner } from 'react-bootstrap';
+import { Button, Card, Form, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import swal from 'sweetalert';
 
@@ -13,7 +13,7 @@ const UpdateService = () => {
 
 
     useEffect(() => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/service/${id}`)
+        fetch(`https://car-repair-server-production.up.railway.app/service/${id}`)
             .then(res => res.json())
             .then(data => {
                 const newService = { ...data }
@@ -52,7 +52,7 @@ const UpdateService = () => {
                     image
 
                 }
-                fetch(`https://obscure-waters-41987.herokuapp.com/service?id=${updated._id}`, {
+                fetch(`https://car-repair-server-production.up.railway.app/service?id=${updated._id}`, {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Spinner } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import Rating from 'react-rating';
 import swal from 'sweetalert';
 import useAuth from '../../../hooks/useAuth/useAuth';
@@ -11,7 +11,7 @@ const Review = () => {
     const [users, setUsers] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${user.email}`)
+        fetch(`https://car-repair-server-production.up.railway.app/userByEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])
@@ -20,7 +20,7 @@ const Review = () => {
         const review = { text: text, rating: rating, user: users }
 
         setIsLoading(true)
-        fetch('https://obscure-waters-41987.herokuapp.com/review', {
+        fetch('https://car-repair-server-production.up.railway.app/review', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

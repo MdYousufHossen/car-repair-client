@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Col, ListGroup } from 'react-bootstrap';
-import './news.css'
 import Fade from 'react-reveal/Fade';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './news.css';
 
 // const services = [
 //     {
@@ -69,7 +68,7 @@ const Newses = () => {
 
     console.log('newses', newses);
     useEffect(() => {
-        fetch('https://obscure-waters-41987.herokuapp.com/newses')
+        fetch('https://car-repair-server-production.up.railway.app/newses')
             .then(res => res.json())
             .then(data => setNewses([...data].reverse()))
     }, [])

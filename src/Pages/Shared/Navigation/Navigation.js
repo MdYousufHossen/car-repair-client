@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Nav, Navbar, Card } from 'react-bootstrap';
+import { Card, Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth/useAuth';
-import logo from '../../Images/logo-orange-2.png'
+import logo from '../../Images/logo-orange-2.png';
 
 const Navigation = () => {
     const { user, userLogOut } = useAuth();
     const [users, setUsers] = useState({})
     useEffect(() => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${user.email}`)
+        fetch(`https://car-repair-server-production.up.railway.app/userByEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [user.email])

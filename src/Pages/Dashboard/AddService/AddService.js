@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Card, Form, Button, Spinner } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Card, Form, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import swal from 'sweetalert';
 
@@ -46,7 +46,7 @@ const AddService = () => {
 
                 }
                 console.log(editedData)
-                fetch(`https://obscure-waters-41987.herokuapp.com/service`, {
+                fetch(`https://car-repair-server-production.up.railway.app/service`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

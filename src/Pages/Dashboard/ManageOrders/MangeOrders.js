@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Spinner, Table } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Spinner, Table } from 'react-bootstrap';
 import swal from 'sweetalert';
 import useAuth from './../../../hooks/useAuth/useAuth';
 
@@ -10,7 +10,7 @@ const Orders = () => {
     const [isLoading, setIsLoading] = useState(true)
     console.log(orders);
     useEffect(() => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/orders`)
+        fetch(`https://car-repair-server-production.up.railway.app/orders`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data)
@@ -34,7 +34,7 @@ const Orders = () => {
                         icon: "success",
                     });
 
-                    fetch(`https://obscure-waters-41987.herokuapp.com/order/${id}`, {
+                    fetch(`https://car-repair-server-production.up.railway.app/order/${id}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json'

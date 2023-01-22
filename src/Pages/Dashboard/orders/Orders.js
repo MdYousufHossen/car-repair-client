@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Table } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Table } from 'react-bootstrap';
 import swal from 'sweetalert';
 import useAuth from './../../../hooks/useAuth/useAuth';
 
@@ -9,7 +9,7 @@ const Orders = () => {
     const [orders, setOrders] = useState([])
     console.log(orders);
     useEffect(() => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/orderbyEmail?email=${user.email}`)
+        fetch(`https://car-repair-server-production.up.railway.app/orderbyEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setOrders(data))
     }, [user.email])
@@ -27,7 +27,7 @@ const Orders = () => {
                     swal("Poof! Your are successfully log Out!", {
                         icon: "success",
                     });
-                    fetch(`https://obscure-waters-41987.herokuapp.com/order/${id}`, {
+                    fetch(`https://car-repair-server-production.up.railway.app/order/${id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())

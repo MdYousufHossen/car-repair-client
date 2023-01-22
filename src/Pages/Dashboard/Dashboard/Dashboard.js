@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Card, Nav } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
-import { Nav, Card } from 'react-bootstrap';
 import useAuth from './../../../hooks/useAuth/useAuth';
 
 
@@ -8,7 +8,7 @@ const Dashboard = () => {
     const { user, isAdmin, userLogOut } = useAuth();
     const [users, setUsers] = useState({})
     useEffect(() => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${user.email}`)
+        fetch(`https://car-repair-server-production.up.railway.app/userByEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Card, Spinner } from 'react-bootstrap';
+import { Button, Card, Form, Spinner } from 'react-bootstrap';
 import swal from 'sweetalert';
 
 
@@ -39,7 +39,7 @@ const News = () => {
                     image
                 }
                 console.log(editedData)
-                fetch(`https://obscure-waters-41987.herokuapp.com/news`, {
+                fetch(`https://car-repair-server-production.up.railway.app/news`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

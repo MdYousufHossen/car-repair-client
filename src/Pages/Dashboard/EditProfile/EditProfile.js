@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Card, Button, Spinner } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Card, Form, Spinner } from 'react-bootstrap';
 import swal from 'sweetalert';
 import useAuth from './../../../hooks/useAuth/useAuth';
 
@@ -28,7 +28,7 @@ const EditProfile = () => {
             .then(data => {
                 const image = data.data.display_url
                 console.log(image, 'imageeee')
-                fetch(`https://obscure-waters-41987.herokuapp.com/user?email=${user.email}`, {
+                fetch(`https://car-repair-server-production.up.railway.app/user?email=${user.email}`, {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'
@@ -46,7 +46,7 @@ const EditProfile = () => {
     }
 
     useEffect(() => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/userByEmail?email=${user.email}`)
+        fetch(`https://car-repair-server-production.up.railway.app/userByEmail?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])

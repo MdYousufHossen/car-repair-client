@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import Footer from '../Shared/Footer/Footer';
-import Navigation from './../Shared/Navigation/Navigation';
 import { Card, Col, Form, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
-import './purchase.css'
-import useAuth from '../../hooks/useAuth/useAuth';
-import swal from 'sweetalert';
+import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+import useAuth from '../../hooks/useAuth/useAuth';
+import Footer from '../Shared/Footer/Footer';
+import Navigation from './../Shared/Navigation/Navigation';
+import './purchase.css';
 
 const Purchase = () => {
     const { id } = useParams();
@@ -19,7 +19,7 @@ const Purchase = () => {
     const onSubmit = data => {
         setIsLoading(true)
         data.service = service
-        fetch('https://obscure-waters-41987.herokuapp.com/order', {
+        fetch('https://car-repair-server-production.up.railway.app/order', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -39,7 +39,7 @@ const Purchase = () => {
 
 
     useEffect(() => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/service/${id}`)
+        fetch(`https://car-repair-server-production.up.railway.app/service/${id}`)
             .then(res => res.json())
             .then(data => setService(data))
     }, [])

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Container, Row, Button, Spinner } from 'react-bootstrap';
+import { Button, Card, Col, Row, Spinner } from 'react-bootstrap';
 import Zoom from 'react-reveal/Zoom';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 
@@ -11,7 +11,7 @@ const ManageServices = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        fetch('https://obscure-waters-41987.herokuapp.com/services')
+        fetch('https://car-repair-server-production.up.railway.app/services')
             .then(res => res.json())
             .then(data => {
                 setServices(data)
@@ -31,7 +31,7 @@ const ManageServices = () => {
                     swal("Poof! Your imaginary file has been deleted!", {
                         icon: "success",
                     });
-                    fetch(`https://obscure-waters-41987.herokuapp.com/service/${id}`, {
+                    fetch(`https://car-repair-server-production.up.railway.app/service/${id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())

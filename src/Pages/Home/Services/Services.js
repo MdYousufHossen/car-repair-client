@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import Zoom from 'react-reveal/Zoom';
-import { NavLink, Link } from 'react-router-dom';
-import './service.css'
+import { Link } from 'react-router-dom';
+import './service.css';
 
 
 // const services = [
@@ -57,7 +57,7 @@ const Services = () => {
     const [services, setServices] = useState([])
 
     useEffect(() => {
-        fetch('https://obscure-waters-41987.herokuapp.com/services')
+        fetch('https://car-repair-server-production.up.railway.app/services')
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])

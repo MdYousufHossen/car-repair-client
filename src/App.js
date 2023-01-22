@@ -1,28 +1,27 @@
-import './App.css';
-import Home from './Pages/Home/Home/Home';
 import {
-  Routes,
-  Route,
+  Route, Routes
 } from "react-router-dom";
-import Purchase from './Pages/Purchase/Purchase';
-import Login from './Pages/Authentication/Login/Login';
-import Registration from './Pages/Authentication/Registration/Registration';
-import PrivateRoute from './Pages/Authentication/PrivateRoute/PrivateRoute';
-import Orders from './Pages/Dashboard/orders/Orders';
-import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
-import Review from './Pages/Dashboard/Review/Review';
-import News from './Pages/Dashboard/News/News';
-import EditProfile from './Pages/Dashboard/EditProfile/EditProfile';
-import ManageServices from './Pages/Dashboard/ManageServices/ManageServices';
-import UpdateService from './Pages/Dashboard/UpdateService/UpdateService';
+import './App.css';
 import useAuth from './hooks/useAuth/useAuth';
-import MangeOrders from './Pages/Dashboard/ManageOrders/MangeOrders';
 import AdminRoute from './Pages/Authentication/AdminRoute/AdminRoute';
+import Login from './Pages/Authentication/Login/Login';
+import PrivateRoute from './Pages/Authentication/PrivateRoute/PrivateRoute';
+import Registration from './Pages/Authentication/Registration/Registration';
 import AddService from './Pages/Dashboard/AddService/AddService';
+import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import EditProfile from './Pages/Dashboard/EditProfile/EditProfile';
+import MangeOrders from './Pages/Dashboard/ManageOrders/MangeOrders';
+import ManageServices from './Pages/Dashboard/ManageServices/ManageServices';
+import News from './Pages/Dashboard/News/News';
+import Orders from './Pages/Dashboard/orders/Orders';
+import Review from './Pages/Dashboard/Review/Review';
+import UpdateService from './Pages/Dashboard/UpdateService/UpdateService';
+import Home from './Pages/Home/Home/Home';
 import NewsDetails from './Pages/NewsDetails/NewsDetails';
+import Purchase from './Pages/Purchase/Purchase';
 
 function App() {
-  const { user, isAdmin } = useAuth();
+  const {  isAdmin } = useAuth();
   return (
 
     <Routes>

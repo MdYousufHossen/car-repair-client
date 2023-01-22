@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Card, Col } from 'react-bootstrap';
+import Rating from 'react-rating';
+import Fade from 'react-reveal/Fade';
 import SwiperCore, {
-    Pagination,
-    Navigation,
-    Scrollbar,
-    A11y
+    A11y, Navigation, Pagination, Scrollbar
 } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
-import 'swiper/swiper.scss';
 import 'swiper/modules/navigation/navigation.scss';
 import 'swiper/modules/pagination/pagination.scss';
 import 'swiper/modules/scrollbar/scrollbar.scss';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import Fade from 'react-reveal/Fade';
-import Rating from 'react-rating';
-import Review from '../../Dashboard/Review/Review';
+import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
+import 'swiper/swiper.scss';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
@@ -111,7 +107,7 @@ const services = [
 const Testimonials = () => {
     const [reviews, setReviews] = useState([])
     useEffect(() => {
-        fetch('https://obscure-waters-41987.herokuapp.com/review')
+        fetch('https://car-repair-server-production.up.railway.app/review')
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [])

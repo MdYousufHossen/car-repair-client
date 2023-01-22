@@ -1,7 +1,7 @@
-import initialization from './../../Pages/Authentication/firebase/firebase.init';
-import { getAuth, updateProfile, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useEffect, useState } from 'react';
 import swal from 'sweetalert';
+import initialization from './../../Pages/Authentication/firebase/firebase.init';
 
 
 initialization();
@@ -117,7 +117,7 @@ const useFirebase = () => {
 
     // admin validation......................
     useEffect(() => {
-        fetch(`https://obscure-waters-41987.herokuapp.com/isadmin/${user.email}`)
+        fetch(`https://car-repair-server-production.up.railway.app/isadmin/${user.email}`)
             .then(res => res.json())
             .then(data => setAdmin(data.admin))
     }, [user.email])
@@ -125,7 +125,7 @@ const useFirebase = () => {
 
     const saveUser = (name, email) => {
         const user = { name, email }
-        fetch('https://obscure-waters-41987.herokuapp.com/user', {
+        fetch('https://car-repair-server-production.up.railway.app/user', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
